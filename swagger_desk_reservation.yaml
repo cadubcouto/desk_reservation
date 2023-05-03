@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Swagger Desk Reservation - OpenAPI 3.0
+
+servers:
+  - url: http://127.0.0.1:5000/api/v1
+tags:
+  - name: reservation
+    description: Everything about your Reservation
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: store
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /reservation/reservation_by_date:
+    get:
+      tags:
+        - reservation
+      summary: Consulta Reservas por Data
+      description: 
+      operationId: 
+      parameters:
+        - name: date
+          in: query
+          description: Data no formato AAAA-MM-DD
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref:       
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: 
+        '400':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /reservation/reservation_by_document_number:
+    get:
+      tags:
+        - reservation
+      summary: Retorna as reservas de um Coloborador.
+      description: Retorna as reservas de um Coloborador;
+      parameters:
+        - name: document_number
+          in: query
+          description: Número do CPF do Colobarador com "." e "-".
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid tag value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /reservation:
+    post:
+      tags:
+        - reservation
+      summary: Cria uma reserva
+      description: 
+      operationId: 
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservation'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+    
+  
+components:
+  schemas:
+    Reservation:
+      type: object
+      properties:
+        date:
+          type: string
+          format: string
+          example: 2023-05-01
+        worker_id:
+          type: integer
+          format: int32
+          example: 1
+        unit_id:
+          type: integer
+          format: int32
+          example: 1
+        is_included_desk:
+          type: boolean
+        is_included_parking:
+          type: boolean
+    
+    
