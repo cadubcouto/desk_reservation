@@ -7,21 +7,26 @@ Desk Reservation é uma aplicação que permite o colaborador realizar a reserva
 
 
 1. Criar venv -
+
 python -m venv venv
 
 2. Intalar pacotes - 
+
 pip install -r requirements.txt
 
 3. Configurar acesso ao Banco de Dados Postgres - 
+
 Atualizar as credenciais no arquivo .env
 DATABASE_IP_APP="localhost"
 USER_DATABASE_APP="desk"
 POSTGRES="postgresql+psycopg2://desk:@localhost/desk"
 
-4. Criar os tabelas no bando de dados - 
+4. Criar os tabelas no bando de dados -
+
 python models.py
 
 5. Iniciar aplicação - 
+
 python main.py
 
 
